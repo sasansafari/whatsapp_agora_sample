@@ -12,14 +12,33 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Attachment.png
+  AssetGenImage get attachment =>
+      const AssetGenImage('assets/icons/Attachment.png');
+
+  /// File path: assets/icons/Groupcamera.png
+  AssetGenImage get groupcamera =>
+      const AssetGenImage('assets/icons/Groupcamera.png');
+
+  /// File path: assets/icons/Subtract.png
+  AssetGenImage get subtract =>
+      const AssetGenImage('assets/icons/Subtract.png');
+
   /// File path: assets/icons/add_status.svg
   String get addStatus => 'assets/icons/add_status.svg';
 
   /// File path: assets/icons/dot_menu.svg
   String get dotMenu => 'assets/icons/dot_menu.svg';
 
+  /// File path: assets/icons/emoji.png
+  AssetGenImage get emoji => const AssetGenImage('assets/icons/emoji.png');
+
   /// File path: assets/icons/incall.svg
   String get incall => 'assets/icons/incall.svg';
+
+  /// File path: assets/icons/microphone.png
+  AssetGenImage get microphone =>
+      const AssetGenImage('assets/icons/microphone.png');
 
   /// File path: assets/icons/phone_icon.svg
   String get phoneIcon => 'assets/icons/phone_icon.svg';

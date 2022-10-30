@@ -54,4 +54,17 @@ class SnTextStyles{
         fontStyle: FontStyle.normal,
         color: const Color.fromARGB(255, 255, 255, 255));
 
+          static TextStyle todayText   = GoogleFonts.inter(
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color:SnColors.todayColor);
+        
+         static TextStyle messageText   = GoogleFonts.inter(
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        fontStyle: FontStyle.normal,
+        color:SnColors.todayColor);
+
+
 }
