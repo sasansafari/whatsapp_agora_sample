@@ -19,219 +19,227 @@ class MainScreen extends StatelessWidget {
 
   UserInboxListController userInboxListController =
       Get.put(UserInboxListController());
+  var tabSize = Get.width / 4;
 
  
 
   @override
   Widget build(BuildContext context) {
-    var tabSize = Get.width / 4;
 
     return SafeArea(
         child: Scaffold(
       body:DefaultTabController(
         length: 1,
-        child: NestedScrollView(     
-                  headerSliverBuilder: (context, innerBoxIsScrolled) {
-                    return <Widget>[
-                      SliverAppBar(
-                        title: Text("WhatsApp"),
-                        backgroundColor: SnColors.whatsappColor,
-                        expandedHeight: 100,    
-                        pinned: true,
-                        floating: true,
-                        bottom: TabBar(
-                          tabs: [
-                            Container(
-                              height: 35,
-                              color:  SnColors.whatsappColor,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //camnera
-                                  SizedBox(
-                                    width: Get.width / 13,
-                                    child: const Icon(
-                                      Icons.camera,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  //tabs
-                                  Expanded(
-                                    child: SizedBox(
-                                      height: 34,
-                                      child: Center(
-                                          child: ListView.builder(
-                                              scrollDirection: Axis.horizontal,
-                                              itemCount: tabTitleList.length,
-                                              shrinkWrap: true,
-                                              itemBuilder:
-                                                  ((context, index) =>
-                                                      GestureDetector(
-                                                        onTap: (() {
-                                                          selectedTabIndex.value =
-                                                              index;
-                                                        }),
-                                                        child: Obx(
-                                                          () => SizedBox(
-                                                              width: tabSize,
-                                                              child: Center(
-                                                                  child: Column(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceAround,
-                                                                children: [
-                                                                  Text(
-                                                                    tabTitleList[
-                                                                        index],
-                                                                    style: index ==
-                                                                            selectedTabIndex
-                                                                                .value
-                                                                        ? SnTextStyles.selectedTabBarTextStyle
-                                                                        : SnTextStyles.unselectedTabBarTextStyle,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                        horizontal:
-                                                                            4),
-                                                                    child:
-                                                                        AnimatedOpacity(
-                                                                            duration: const Duration(
-                                                                                milliseconds:
-                                                                                    500),
-                                                                            opacity: index == selectedTabIndex.value
-                                                                                ? 1
-                                                                                : 0,
-                                                                            child:
-                                                                                Container(
-                                                                              height:
-                                                                                  2,
-                                                                              color:
-                                                                                  Colors.white,
-                                                                            )),
-                                                                  )
-                                                                ],
-                                                              ))),
-                                                        ),
-                                                      )))),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ];
-                    
-                  },
-      
-             body: SingleChildScrollView(
-          child: Column(children: [
-        
-            Obx(
-              () => IndexedStack(
-                index: selectedTabIndex.value,
-                children: [
-                  chatScreen(),
-                  //status
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //Tap to add status update
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(1000),
-                                  child: Image.asset(
-                                    Assets.images.flix.path,
-                                    height: 60,
-                                    width: 60,
-                                  ),
-                                ),
-                                Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child:
-                                        SvgPicture.asset(Assets.icons.addStatus))
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 16,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "My status",
-                                  style: SnTextStyles.bigTitle,
-                                ),
-                                Text(
-                                  "Tap to add status update",
-                                  style: SnTextStyles.cation,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      //recent update
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("Recent updates"),
-                      ),
-      
-                      //recent updates
-                      ListView.builder(
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: 5,
-                          shrinkWrap: true,
-                          itemBuilder: ((context, index) {
-                            return statusItem(
-                                image: Assets.images.flix.path,
-                                name: "FelAngel",
-                                date: "Today, 19:06");
-                          })),
-                      //Viewed updates
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("Viewed updates"),
-                      ),
-      
-                      //recent updates
-                      ListView.builder(
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: 2,
-                          shrinkWrap: true,
-                          itemBuilder: ((context, index) {
-                            return statusItem(
-                                image: Assets.images.av.path,
-                                name: 'sasan',
-                                date: "Today, 19:06");
-                          }))
-                    ],
-                  ),
-                  callsScreen()
-                ],
-              ),
-            )
-          ]),
-        ),
-          ),
+        child: mainAppBar(tabSize),
       ),
     
-      floatingActionButton: FloatingActionButton(
-          onPressed: (() {
-            Get.to(ContactListScreen());
-          }),
-          child: const Icon(Icons.chat)),
+      floatingActionButton: addNewChat(),
     )
     );
+  }
+
+  FloatingActionButton addNewChat() {
+    return FloatingActionButton(
+        onPressed: (() {
+          Get.to(ContactListScreen());
+        }),
+        child: const Icon(Icons.chat));
+  }
+
+  NestedScrollView mainAppBar(double tabSize) {
+    return NestedScrollView(     
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return [
+                    SliverAppBar(
+                      title: const Text("WhatsApp"),
+                      backgroundColor: SnColors.whatsappColor,
+                      expandedHeight: 100,    
+                      pinned: true,
+                      floating: true,
+                      bottom: TabBar(
+                        tabs: [
+                          Container(
+                            height: 35,
+                            color:  SnColors.whatsappColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                //camnera
+                                SizedBox(
+                                  width: Get.width / 13,
+                                  child: const Icon(
+                                    Icons.camera,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                //tabs
+                                Expanded(
+                                  child: SizedBox(
+                                    height: 34,
+                                    child: Center(
+                                        child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: tabTitleList.length,
+                                            shrinkWrap: true,
+                                            itemBuilder:
+                                                ((context, index) =>
+                                                    GestureDetector(
+                                                      onTap: (() {
+                                                        selectedTabIndex.value =
+                                                            index;
+                                                      }),
+                                                      child: Obx(
+                                                        () => SizedBox(
+                                                            width: tabSize,
+                                                            child: Center(
+                                                                child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
+                                                              children: [
+                                                                Text(
+                                                                  tabTitleList[
+                                                                      index],
+                                                                  style: index ==
+                                                                          selectedTabIndex
+                                                                              .value
+                                                                      ? SnTextStyles.selectedTabBarTextStyle
+                                                                      : SnTextStyles.unselectedTabBarTextStyle,
+                                                                ),
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                      horizontal:
+                                                                          4),
+                                                                  child:
+                                                                      AnimatedOpacity(
+                                                                          duration: const Duration(
+                                                                              milliseconds:
+                                                                                  500),
+                                                                          opacity: index == selectedTabIndex.value
+                                                                              ? 1
+                                                                              : 0,
+                                                                          child:
+                                                                              Container(
+                                                                            height:
+                                                                                2,
+                                                                            color:
+                                                                                Colors.white,
+                                                                          )),
+                                                                )
+                                                              ],
+                                                            ))),
+                                                      ),
+                                                    )))),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ];
+                  
+                },
+    
+           body: SingleChildScrollView(
+        child: Column(children: [
+      
+          Obx(
+            () => IndexedStack(
+              index: selectedTabIndex.value,
+              children: [
+                chatScreen(),
+                //status
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //Tap to add status update
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(1000),
+                                child: Image.asset(
+                                  Assets.images.flix.path,
+                                  height: 60,
+                                  width: 60,
+                                ),
+                              ),
+                              Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child:
+                                      SvgPicture.asset(Assets.icons.addStatus))
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "My status",
+                                style: SnTextStyles.bigTitle,
+                              ),
+                              Text(
+                                "Tap to add status update",
+                                style: SnTextStyles.cation,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    //recent update
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Recent updates"),
+                    ),
+    
+                    //recent updates
+                    ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: 5,
+                        shrinkWrap: true,
+                        itemBuilder: ((context, index) {
+                          return statusItem(
+                              image: Assets.images.flix.path,
+                              name: "FelAngel",
+                              date: "Today, 19:06");
+                        })),
+                    //Viewed updates
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text("Viewed updates"),
+                    ),
+    
+                    //recent updates
+                    ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: 2,
+                        shrinkWrap: true,
+                        itemBuilder: ((context, index) {
+                          return statusItem(
+                              image: Assets.images.av.path,
+                              name: 'sasan',
+                              date: "Today, 19:06");
+                        }))
+                  ],
+                ),
+                callsScreen()
+              ],
+            ),
+          )
+        ]),
+      ),
+        );
   }
 
   Widget statusItem({

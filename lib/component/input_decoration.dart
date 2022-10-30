@@ -5,19 +5,8 @@ import 'package:whatsapp_agora_sample/constants/dimens.dart';
 import 'package:whatsapp_agora_sample/constants/whatsapp_color.dart';
 
  class SnInputDecotration{
-
-    String hintText;
-    IconData icon;
-    SnInputDecotration({
-      required this.hintText,
-      required this.icon,
-    
-    });
-
-
-
-
-    InputDecoration normalForms(){
+ 
+    static InputDecoration normalForms({required String hintText,IconData? icon}){
        return InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
@@ -28,13 +17,26 @@ import 'package:whatsapp_agora_sample/constants/whatsapp_color.dart';
             borderSide: BorderSide(color: SnColors.whatsappColor),
           ),
           filled: true,
-          prefixIcon: Icon(icon),
+          prefixIcon:Icon(icon) ,
+          fillColor: SnColors.lightScaffoldBackgraoundColor);
+    }
+ 
+    static InputDecoration sendMessage({required String hintText,IconData? icon}){
+       return InputDecoration(
+          hintText: hintText,
+          enabledBorder: OutlineInputBorder(
+               borderSide: BorderSide.none),
+          border: OutlineInputBorder(
+             borderSide: BorderSide.none,
+          ),
+          filled: true,
+          prefixIcon:Icon(icon) ,
           fillColor: SnColors.lightScaffoldBackgraoundColor);
     }
 
 
 
-    InputDecoration searchForms(){
+    static InputDecoration searchForms({required String hintText}){
        return InputDecoration(
           hintText: hintText,
           enabledBorder: OutlineInputBorder(
@@ -45,7 +47,7 @@ import 'package:whatsapp_agora_sample/constants/whatsapp_color.dart';
             borderSide: BorderSide(color: SnColors.whatsappColor),
           ),
           filled: true,
-          prefixIcon: Icon(icon),
+          prefixIcon: const Icon(Icons.search),
           fillColor: SnColors.lightScaffoldBackgraoundColor);
     }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:whatsapp_agora_sample/component/input_decoration.dart';
 import 'package:whatsapp_agora_sample/component/text_style.dart';
 import 'package:whatsapp_agora_sample/constants/dimens.dart';
 import 'package:whatsapp_agora_sample/constants/whatsapp_color.dart';
@@ -97,64 +98,87 @@ class ChatScreen extends StatelessWidget {
           ),
         ),
         
-      ]),
-
-      bottomNavigationBar:
-        Container(
-          color: Colors.blue,
+        //text send msg
+        Positioned(
+          bottom: 10,
+          left: 10,
+          right: 10,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-             
-               Padding(
-                 padding: const EdgeInsets.only(left:1.2,right: 4),
-                 child: Container(
-              width: 359,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),   
-                  color: SnColors.lightScaffoldBackgraoundColor,
+            mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+            //Message box
+            Expanded(
+              flex: 8,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 1.2, right: 4),
+                child: Container(
+                    height: 58,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: SnColors.lightScaffoldBackgraoundColor,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(Dimens.small),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 13,
+                          ),
+                          Image(image: Image.asset(Assets.icons.emoji.path).image),
+                          const SizedBox(
+                            width: Dimens.small,
+        
+                          ),
+                          Expanded(
+                            child: TextField(
+                                decoration: SnInputDecotration.sendMessage(
+                                    hintText: "send message")),
+                          ),
+                           const SizedBox(
+                            width: Dimens.small,
+        
+                          ),
+                          Image(
+                              image:
+                                  Image.asset(Assets.icons.attachment.path).image),
+                          const SizedBox(
+                            width:Dimens.small,
+                          ),
+                          Image(
+                              image: Image.asset(Assets.icons.subtract.path).image),
+                          const SizedBox(
+                            width:Dimens.small,
+                          ),
+                          Image(
+                              image:
+                                  Image.asset(Assets.icons.groupcamera.path).image),
+                        ],
+                      ),
+                    )),
               ),
-             child: 
-            Row(
-              children: [
-                const SizedBox(width: 13,),
-                 Image(image: Image.asset(Assets.icons.emoji.path).image),
-                 const SizedBox(width: 11,height: 11,),
-                 Text("Messages",style: SnTextStyles.messageText,),
-                 const SizedBox(width: 150,),
-                 Image(image: Image.asset(Assets.icons.attachment.path).image),
-                 const SizedBox(width: 6,),
-                  Image(image: Image.asset(Assets.icons.subtract.path).image),
-                   const SizedBox(width: 6,),
-                   Image(image: Image.asset(Assets.icons.groupcamera.path).image),
+            ),
 
-              ],
-            )
-              ),
-               ),
-            
-              Container(
-              height: 46,
-              width: 46,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: SnColors.badg,
-              ),  
-              child: 
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Image(image: Image.asset(Assets.icons.microphone.path).image),
-                ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: 58,
               
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: SnColors.badg,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Image(
+                      image: Image.asset(Assets.icons.microphone.path).image),
+                ),
               ),
-           
-            ]
-            
-          ),
-        ),
+            ),
+          ]),
 
-       
+       )
+      ]),
+ 
     ));
     
   }

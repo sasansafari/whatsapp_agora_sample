@@ -40,30 +40,23 @@ class ContactListScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               onChanged: ((value) => userContactController.search(value)),
-              decoration: SnInputDecotration(
-                hintText: "Type To Search",
-                icon: Icons.search
-                
-                ).searchForms(),
+              decoration: SnInputDecotration.searchForms(hintText: "Type To Search"),
              ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              decoration: SnInputDecotration(
+              decoration: SnInputDecotration.normalForms(
                 hintText: "Name and Last Name",
-                icon: Icons.edit
-                ).normalForms(),
+                icon: Icons.edit),
               controller: userContactController.usernameTextEditingController,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              decoration: SnInputDecotration(
-                hintText: "Phone Number",
-                icon: Icons.phone
-                ).normalForms(),
+              decoration: SnInputDecotration.normalForms(hintText: "Phone Number",
+                icon: Icons.phone),
               controller: userContactController.phoneTextEditingController,
             ),
           ),
