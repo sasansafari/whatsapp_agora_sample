@@ -52,6 +52,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/flix.jpg
   AssetGenImage get flix => const AssetGenImage('assets/images/flix.jpg');
+
+  /// File path: assets/images/wall.png
+  AssetGenImage get wall => const AssetGenImage('assets/images/wall.png');
 }
 
 class Assets {

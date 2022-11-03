@@ -24,9 +24,9 @@ import 'package:whatsapp_agora_sample/constants/whatsapp_color.dart';
     static InputDecoration sendMessage({required String hintText,IconData? icon}){
        return InputDecoration(
           hintText: hintText,
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
                borderSide: BorderSide.none),
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
              borderSide: BorderSide.none,
           ),
           filled: true,

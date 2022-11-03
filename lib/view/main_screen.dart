@@ -289,7 +289,7 @@ class MainScreen extends StatelessWidget {
             itemBuilder: ((context, index) => GestureDetector(
                   onTap: (() {
                     //TODO Go to Chat Screen
-                    Get.to(const ChatScreen());
+                    Get.to(  ChatScreen());
                   }),
 
                   //TODO imagePath is empty an hard code
@@ -311,7 +311,7 @@ class MainScreen extends StatelessWidget {
             itemBuilder: ((context, index) => GestureDetector(
                   onTap: (() {
                     //TODO Go to Chat Screen
-                    Get.to(const ChatScreen());
+                    Get.to(  ChatScreen());
                   }),
 
                   //TODO imagePath is empty an hard code
